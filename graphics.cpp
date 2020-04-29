@@ -14,6 +14,7 @@ using namespace std;
 GLdouble width, height;
 int wd;
 Spaceship ship;
+vector<unique_ptr<FallingStuff>> falling_vec;
 
 void init() {
     width = 1000;
@@ -47,6 +48,11 @@ void display() {
 
     // doodle time
     ship.draw();
+    if(!falling_vec.empty()) {
+        for (int i = 0; i < falling_vec.size(); ++i){
+            falling_vec[i]->draw();
+        }
+    }
 
     glFlush();  // Render now
 }
@@ -68,10 +74,10 @@ void kbdS(int key, int x, int y) {
 
             break;
         case GLUT_KEY_LEFT:
-            ship.move(-5.0, 0.0);
+            ship.move(-10.0, 0.0);
             break;
         case GLUT_KEY_RIGHT:
-            ship.move(5.0, 0.0);
+            ship.move(10.0, 0.0);
             break;
         case GLUT_KEY_UP:
 
@@ -94,7 +100,11 @@ void mouse(int button, int state, int x, int y) {
 }
 
 void timer(int dummy) {
-
+    if(!falling_vec.empty()) {
+        for (int i = 0; i < falling_vec.size(); ++i){
+            falling_vec[i]->fall();
+        }
+    }
     glutPostRedisplay();
     glutTimerFunc(30, timer, dummy);
 }

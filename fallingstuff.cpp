@@ -35,6 +35,6 @@ void FallingStuff::draw() const {
 }
 
 
-void FallingStuff::fall(double start_x) {
-    center_point = {start_x, 0.0};
+void FallingStuff::fall() {
+    center_point = {0.0, 0.0};
 }
