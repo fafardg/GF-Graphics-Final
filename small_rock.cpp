@@ -2,18 +2,17 @@
 // Created by George on 4/29/20.
 //
 
-#include "bigrock.h"
-#include "graphics.h"
+#include "small_rock.h"
 
-BigRock::BigRock(double start_x){
-    speed = 5;
-    height = 75;
-    width = 75;
+SmallRock::SmallRock(double start_x){
+    speed = 15;
+    height = 25;
+    width = 25;
     center_point = {start_x,0};
     reset_corners();
 };
 
-void BigRock::reset_corners() {
+void SmallRock::reset_corners() {
     corners.clear();
     corners.resize(4);
     // size corners here
@@ -23,7 +22,7 @@ void BigRock::reset_corners() {
     corners[3] = {center_point.x + width/2.0, center_point.y + height/2.0};
 }
 
-void BigRock::draw() const {
+void SmallRock::draw() const {
     glBegin(GL_QUADS);
     glColor3f(0.5, 0.30, 0.05);
     for(int i = 0; i < corners.size(); ++i) {
@@ -32,29 +31,29 @@ void BigRock::draw() const {
     glEnd();
 }
 
-void BigRock::fall() {
+void SmallRock::fall() {
     center_point = {center_point.x, center_point.y + speed};
     for(int i = 0; i < corners.size(); ++i) {
         corners[i] = {corners[i].x, corners[i].y + speed};
     }
 }
 
-double BigRock::get_y() const {
+double SmallRock::get_y() const {
     return center_point.y;
 }
 
-point BigRock::get_corner() const {
+point SmallRock::get_corner() const {
     return corners[1];
 }
 
-int BigRock::get_area() const {
+int SmallRock::get_area() const {
     return height * width;
 }
 
-int BigRock::get_height() const {
+int SmallRock::get_height() const {
     return height;
 }
 
-int BigRock::get_width() const {
+int SmallRock::get_width() const {
     return width;
 }

@@ -2,13 +2,13 @@
 // Created by George on 4/27/20.
 //
 
-#ifndef GF_GRAPHICS_FINAL_MEDIUMROCK_H
-#define GF_GRAPHICS_FINAL_MEDIUMROCK_H
+#ifndef GF_GRAPHICS_FINAL_SMALL_ROCK_H
+#define GF_GRAPHICS_FINAL_SMALL_ROCK_H
 
-#include "fallingstuff.h"
+#include "falling_stuff.h"
 #include "graphics.h"
 
-class MediumRock : public FallingStuff {
+class SmallRock : public FallingStuff {
 private:
     int speed;
     int height;
@@ -16,8 +16,7 @@ private:
     vector<point> corners;
     point center_point;
 public:
-    // see BigRock -- all rocks follow same template
-    explicit MediumRock(double start_x);
+    explicit SmallRock(double start_x);
 
     void reset_corners() override ;
 
@@ -36,5 +35,4 @@ public:
     int get_height() const override;
 };
 
-
-#endif //GF_GRAPHICS_FINAL_MEDIUMROCK_H
+#endif //GF_GRAPHICS_FINAL_SMALL_ROCK_H

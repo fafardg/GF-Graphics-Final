@@ -4,9 +4,9 @@
 
 #include "graphics.h"
 #include "spaceship.h"
-#include "bigrock.h"
-#include "smallrock.h"
-#include "mediumrock.h"
+#include "big_rock.h"
+#include "small_rock.h"
+#include "medium_rock.h"
 #include <iostream>
 using namespace std;
 
@@ -96,7 +96,7 @@ void kbd(unsigned char key, int x, int y) {
 void kbdS(int key, int x, int y) {
     switch(key) {
         case GLUT_KEY_DOWN:
-
+            ship.move(0.0, 10.0);
             break;
         case GLUT_KEY_LEFT:
             ship.move(-10.0, 0.0);
@@ -105,7 +105,7 @@ void kbdS(int key, int x, int y) {
             ship.move(10.0, 0.0);
             break;
         case GLUT_KEY_UP:
-
+            ship.move(0.0, -10.0);
             break;
     }
 

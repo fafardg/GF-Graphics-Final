@@ -1,7 +1,7 @@
 //
 // Created by George on 4/29/20.
 //
-#include "mediumrock.h"
+#include "medium_rock.h"
 
 MediumRock::MediumRock(double start_x){
     speed = 10;

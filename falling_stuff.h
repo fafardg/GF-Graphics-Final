@@ -2,8 +2,8 @@
 // Created by George on 4/27/20.
 //
 
-#ifndef GF_GRAPHICS_FINAL_FALLINGSTUFF_H
-#define GF_GRAPHICS_FINAL_FALLINGSTUFF_H
+#ifndef GF_GRAPHICS_FINAL_FALLING_STUFF_H
+#define GF_GRAPHICS_FINAL_FALLING_STUFF_H
 #include <vector>
 #include "graphics.h"
 #include "spaceship.h"
@@ -51,4 +51,4 @@ public:
 
 };
 
-#endif //GF_GRAPHICS_FINAL_FALLINGSTUFF_H
+#endif //GF_GRAPHICS_FINAL_FALLING_STUFF_H

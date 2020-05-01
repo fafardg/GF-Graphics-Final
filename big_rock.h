@@ -2,10 +2,10 @@
 // Created by George on 4/27/20.
 //
 
-#ifndef GF_GRAPHICS_FINAL_BIGROCK_H
-#define GF_GRAPHICS_FINAL_BIGROCK_H
+#ifndef GF_GRAPHICS_FINAL_BIG_ROCK_H
+#define GF_GRAPHICS_FINAL_BIG_ROCK_H
 
-#include "fallingstuff.h"
+#include "falling_stuff.h"
 #include "graphics.h"
 
 class BigRock : public FallingStuff {
@@ -44,4 +44,4 @@ public:
     int get_height() const override;
 };
 
-#endif //GF_GRAPHICS_FINAL_BIGROCK_H
+#endif //GF_GRAPHICS_FINAL_BIG_ROCK_H
