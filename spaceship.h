@@ -48,6 +48,9 @@ public:
 
     // get destroyed status
     bool get_destroyed() const;
+
+    // get center point
+    point get_center() const;
 };
 
 #endif //GF_GRAPHICS_FINAL_SPACESHIP_H

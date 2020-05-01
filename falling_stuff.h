@@ -10,9 +10,6 @@
 
 using namespace std;
 
-
-
-
 class FallingStuff{
 private:
     int speed;

@@ -84,3 +84,7 @@ void Spaceship::destroy() {
 bool Spaceship::get_destroyed() const{
     return destroyed;
 }
+
+point Spaceship::get_center() const{
+    return center_point;
+}

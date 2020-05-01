@@ -94,18 +94,27 @@ void kbd(unsigned char key, int x, int y) {
 }
 
 void kbdS(int key, int x, int y) {
+    point middle = ship.get_center();
     switch(key) {
         case GLUT_KEY_DOWN:
-            ship.move(0.0, 10.0);
+            if (middle.y < height - 50) {
+                ship.move(0.0, 10.0);
+            }
             break;
         case GLUT_KEY_LEFT:
-            ship.move(-10.0, 0.0);
+            if (middle.x > 50) {
+                ship.move(-10.0, 0.0);
+            }
             break;
         case GLUT_KEY_RIGHT:
-            ship.move(10.0, 0.0);
+            if (middle.x < width - 50) {
+                ship.move(10.0, 0.0);
+            }
             break;
         case GLUT_KEY_UP:
-            ship.move(0.0, -10.0);
+            if (middle.y > 50) {
+                ship.move(0.0, -10.0);
+            }
             break;
     }
 
