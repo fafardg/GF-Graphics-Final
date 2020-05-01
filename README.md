@@ -7,4 +7,4 @@ onslaught of space rocks flying down from the top of the screen. The longer you 
  same time. If your spaceship contacts a rock, the screen will turn red and the game is over. You must use the Escape 
  key to quit the game.  
 #Program details (for graders) #
-The polymorphism all occurs in the fallingstuff parent class, and the assorted sized rock subclasses.
+The polymorphism all occurs in the falling_stuff parent class, and the assorted sized rock subclasses.
