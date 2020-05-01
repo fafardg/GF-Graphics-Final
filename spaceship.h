@@ -36,6 +36,12 @@ public:
 
     // move the ship laterally or vertically
     void move(double delta_x, double delta_y);
+
+    // returns the edge point given a x,y
+    bool detect_hit(double x, double y);
+
+    // make the spaceship go boom
+    void destroy();
 };
 
 #endif //GF_GRAPHICS_FINAL_SPACESHIP_H

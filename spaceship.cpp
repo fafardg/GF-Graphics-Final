@@ -5,6 +5,7 @@
 #include <cmath>
 #include "spaceship.h"
 #include "graphics.h"
+#include <iostream>
 
 /* Private helper methods*/
 void Spaceship::reset_corners() {
@@ -61,4 +62,18 @@ void Spaceship::move(double delta_x, double delta_y) {
         p.x += delta_x;
         p.y += delta_y;
     }
+}
+
+bool Spaceship::detect_hit(double x, double y) {
+    // right side
+    if(x > center_point.x - width/2.0 && x < center_point.x + width/2.0){
+        if(y > center_point.y - height/2.0 && y < center_point.y + height/2.0){
+            return true;
+        }
+    }
+    return false;
+}
+
+void Spaceship::destroy() {
+    cout << "boom" << endl;
 }

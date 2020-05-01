@@ -8,13 +8,33 @@
 #include "smallrock.h"
 #include "mediumrock.h"
 #include <iostream>
-#include <vector>
 using namespace std;
 
 GLdouble width, height;
 int wd;
 Spaceship ship;
 vector<unique_ptr<FallingStuff>> falling_vec;
+
+void make_rock(int rock_size){
+    int start_x = rand() % (int(width) - 100) + 100;
+    if (rock_size == 0){
+        int random = rand() % 3 + 1;
+        if (random == 1){
+            falling_vec.push_back(make_unique<BigRock>(start_x));
+        }else if (random == 2){
+            falling_vec.push_back(make_unique<MediumRock>(start_x));
+        } else {
+            falling_vec.push_back(make_unique<SmallRock>(start_x));
+        }
+    } else if (rock_size == 1){
+        falling_vec.push_back(make_unique<BigRock>(start_x));
+    } else if (rock_size == 2){
+        falling_vec.push_back(make_unique<MediumRock>(start_x));
+    } else if(rock_size == 3){
+        falling_vec.push_back(make_unique<SmallRock>(start_x));
+    }
+    glutPostRedisplay();
+}
 
 void init() {
     width = 1000;
@@ -99,12 +119,65 @@ void mouse(int button, int state, int x, int y) {
     glutPostRedisplay();
 }
 
+int max_rocks = 1;
+int counter = 0;
+point top_left;
+int rock_height;
+int rock_width;
+int rock_area;
 void timer(int dummy) {
-    if(!falling_vec.empty()) {
-        for (int i = 0; i < falling_vec.size(); ++i){
-            falling_vec[i]->fall();
+    // handling number of rocks
+    if(falling_vec.size() < max_rocks) {
+        for (int q = 0; q < max_rocks; ++q) {
+            make_rock(0); // make a random rock
         }
     }
+    // periodically increase the amount of rocks
+    if (counter % 300 == 0){
+        ++max_rocks;
+    }
+    ++counter;
+
+    // major Loop to handle many small events
+    if(!falling_vec.empty()) {
+        for (int i = 0; i < falling_vec.size(); ++i){
+
+
+            // FALL
+            falling_vec[i]->fall();
+
+            // HIT DETECTION
+            top_left = falling_vec[i]->get_corner();
+            rock_height = falling_vec[i]->get_height();
+            rock_width = falling_vec[i]->get_width();
+            rock_area = falling_vec[i]->get_area();
+            for(int p = 0; p < rock_width; ++p){
+                if(ship.detect_hit(top_left.x + p, top_left.y)){
+                    ship.destroy();
+                }
+                if(ship.detect_hit(top_left.x + p, top_left.y + height)){
+                    ship.destroy();
+                }
+            }
+            for(int p = 0; p < rock_height; ++p){
+                if(ship.detect_hit(top_left.x, top_left.y + p)){
+                    ship.destroy();
+                }
+                if(ship.detect_hit(top_left.x + width, top_left.y + p)){
+                    ship.destroy();
+                }
+            }
+
+
+
+            // IF LEAVE THE SCREEN, DELETE
+            if(falling_vec[i]->get_y() > height) {
+                falling_vec.erase(falling_vec.begin() + i);
+            }
+        }
+    }
+
+
     glutPostRedisplay();
     glutTimerFunc(30, timer, dummy);
 }

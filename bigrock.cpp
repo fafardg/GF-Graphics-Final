@@ -38,3 +38,23 @@ void BigRock::fall() {
         corners[i] = {corners[i].x, corners[i].y + speed};
     }
 }
+
+double BigRock::get_y() const {
+    return center_point.y;
+}
+
+point BigRock::get_corner() const {
+    return corners[1];
+}
+
+int BigRock::get_area() const {
+    return height * width;
+}
+
+int BigRock::get_height() const {
+    return height;
+}
+
+int BigRock::get_width() const {
+    return width;
+}

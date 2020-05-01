@@ -36,3 +36,23 @@ void MediumRock::fall() {
         corners[i] = {corners[i].x, corners[i].y + speed};
     }
 }
+
+double MediumRock::get_y() const {
+    return center_point.y;
+}
+
+point MediumRock::get_corner() const {
+    return corners[1];
+}
+
+int MediumRock::get_area() const {
+    return height * width;
+}
+
+int MediumRock::get_height() const {
+    return height;
+}
+
+int MediumRock::get_width() const {
+    return width;
+}

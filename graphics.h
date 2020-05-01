@@ -18,6 +18,7 @@
 #include <GL/glut.h>
 #endif
 
+#include <vector>
 const double PI = 3.14159265358979323846;
 
 // Program initialization NOT OpenGL/GLUT dependent,
@@ -46,6 +47,9 @@ void timer(int dummy);
 
 // Handle mouse button pressed and released events
 void mouse(int button, int state, int x, int y);
+
+// randomly populates rocks based on the provided minimum number of rocks
+void make_rock(int rock_num);
 
 
 #endif //GF_GRAPHICS_FINAL_GRAPHICS_H

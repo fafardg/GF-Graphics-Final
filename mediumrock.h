@@ -16,6 +16,7 @@ private:
     vector<point> corners;
     point center_point;
 public:
+    // see BigRock -- all rocks follow same template
     explicit MediumRock(double start_x);
 
     void reset_corners() override ;
@@ -23,6 +24,16 @@ public:
     void fall() override;
 
     void draw() const override;
+
+    double get_y() const override;
+
+    int get_area() const override;
+
+    point get_corner() const override;
+
+    int get_width() const override;
+
+    int get_height() const override;
 };
 
 

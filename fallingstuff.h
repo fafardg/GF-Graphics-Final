@@ -33,8 +33,21 @@ public:
     virtual void fall();
     // draw
     virtual void draw() const;
-
+    // draw a point
     void draw_point(const point &p) const;
+
+    // get Y value
+    virtual double get_y() const;
+
+    // return Area
+    virtual int get_area() const;
+
+    // get height
+    virtual int get_height() const;
+    // get width
+    virtual int get_width() const;
+    // returns the position of the corners
+    virtual point get_corner() const;
 
 };
 

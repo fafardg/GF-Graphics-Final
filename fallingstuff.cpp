@@ -3,6 +3,7 @@
 //
 #include "fallingstuff.h"
 #include "graphics.h"
+#include <iostream>
 
 /* Helper functions */
 
@@ -36,5 +37,26 @@ void FallingStuff::draw() const {
 
 
 void FallingStuff::fall() {
-    center_point = {0.0, 0.0};
+    cout << "why" << endl;
+}
+
+double FallingStuff::get_y() const {
+    return center_point.y;
+}
+
+int FallingStuff::get_area() const {
+    return height * width;
+}
+
+int FallingStuff::get_height() const {
+    return height;
+}
+
+int FallingStuff::get_width() const {
+    return width;
+}
+
+point FallingStuff::get_corner() const {
+    point corner = corners[0];
+    return corner;
 }
