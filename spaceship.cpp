@@ -20,6 +20,10 @@ void Spaceship::reset_corners() {
     corners[5] = {center_point.x, center_point.y};
 }
 
+void Spaceship::death_corners() {
+    corners.clear();
+}
+
 void Spaceship::draw_point(const point &p) const {
     glVertex2f(p.x, p.y);
 }
@@ -41,9 +45,8 @@ Spaceship::Spaceship(point center_point, unsigned int width, unsigned int height
 
 void Spaceship::draw() const {
     glBegin(GL_TRIANGLES);
-
-    // Left side
     glColor3f(1, 1, 0);
+    // left side
     draw_point(corners[0]);
     draw_point(corners[1]);
     draw_point(corners[2]);
@@ -51,7 +54,6 @@ void Spaceship::draw() const {
     draw_point(corners[3]);
     draw_point(corners[4]);
     draw_point(corners[5]);
-
     glEnd();
 }
 
@@ -75,5 +77,10 @@ bool Spaceship::detect_hit(double x, double y) {
 }
 
 void Spaceship::destroy() {
-    cout << "boom" << endl;
+    death_corners();
+    destroyed = true;
+}
+
+bool Spaceship::get_destroyed() const{
+    return destroyed;
 }

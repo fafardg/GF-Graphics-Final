@@ -67,11 +67,16 @@ void display() {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // DO NOT CHANGE THIS LINE
 
     // doodle time
-    ship.draw();
     if(!falling_vec.empty()) {
         for (int i = 0; i < falling_vec.size(); ++i){
             falling_vec[i]->draw();
         }
+    }
+    if (ship.get_destroyed()){
+        falling_vec.clear();
+        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+    } else{
+        ship.draw();
     }
 
     glFlush();  // Render now
@@ -127,57 +132,55 @@ int rock_width;
 int rock_area;
 void timer(int dummy) {
     // handling number of rocks
-    if(falling_vec.size() < max_rocks) {
-        for (int q = 0; q < max_rocks; ++q) {
-            make_rock(0); // make a random rock
+    if(!ship.get_destroyed()) {
+        if (falling_vec.size() < max_rocks) {
+            for (int q = 0; q < max_rocks; ++q) {
+                make_rock(0); // make a random rock
+            }
         }
+        // periodically increase the amount of rocks
+        if (counter % 300 == 0) {
+            ++max_rocks;
+        }
+        ++counter;
     }
-    // periodically increase the amount of rocks
-    if (counter % 300 == 0){
-        ++max_rocks;
-    }
-    ++counter;
-
     // major Loop to handle many small events
-    if(!falling_vec.empty()) {
-        for (int i = 0; i < falling_vec.size(); ++i){
+    if(!ship.get_destroyed()) {
+        if (!falling_vec.empty()) {
+            for (int i = 0; i < falling_vec.size(); ++i) {
 
 
-            // FALL
-            falling_vec[i]->fall();
+                // FALL
+                falling_vec[i]->fall();
 
-            // HIT DETECTION
-            top_left = falling_vec[i]->get_corner();
-            rock_height = falling_vec[i]->get_height();
-            rock_width = falling_vec[i]->get_width();
-            rock_area = falling_vec[i]->get_area();
-            for(int p = 0; p < rock_width; ++p){
-                if(ship.detect_hit(top_left.x + p, top_left.y)){
-                    ship.destroy();
+                // HIT DETECTION
+                top_left = falling_vec[i]->get_corner();
+                rock_height = falling_vec[i]->get_height();
+                rock_width = falling_vec[i]->get_width();
+                rock_area = falling_vec[i]->get_area();
+                for (int p = 0; p < rock_width; ++p) {
+                    if (ship.detect_hit(top_left.x + p, top_left.y)) {
+                        ship.destroy();
+                    }
+                    if (ship.detect_hit(top_left.x + p, top_left.y + height)) {
+                        ship.destroy();
+                    }
                 }
-                if(ship.detect_hit(top_left.x + p, top_left.y + height)){
-                    ship.destroy();
+                for (int p = 0; p < rock_height; ++p) {
+                    if (ship.detect_hit(top_left.x, top_left.y + p)) {
+                        ship.destroy();
+                    }
+                    if (ship.detect_hit(top_left.x + width, top_left.y + p)) {
+                        ship.destroy();
+                    }
                 }
-            }
-            for(int p = 0; p < rock_height; ++p){
-                if(ship.detect_hit(top_left.x, top_left.y + p)){
-                    ship.destroy();
+                // IF LEAVE THE SCREEN, DELETE
+                if (falling_vec[i]->get_y() > height) {
+                    falling_vec.erase(falling_vec.begin() + i);
                 }
-                if(ship.detect_hit(top_left.x + width, top_left.y + p)){
-                    ship.destroy();
-                }
-            }
-
-
-
-            // IF LEAVE THE SCREEN, DELETE
-            if(falling_vec[i]->get_y() > height) {
-                falling_vec.erase(falling_vec.begin() + i);
             }
         }
     }
-
-
     glutPostRedisplay();
     glutTimerFunc(30, timer, dummy);
 }

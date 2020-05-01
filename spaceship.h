@@ -21,9 +21,12 @@ private:
     unsigned int width;
     unsigned int height;
 
+    bool destroyed = false;
+
     // helper functions
     void reset_corners();
     void draw_point(const point &p) const;
+    void death_corners();
 
 public:
     // Public constructors
@@ -42,6 +45,9 @@ public:
 
     // make the spaceship go boom
     void destroy();
+
+    // get destroyed status
+    bool get_destroyed() const;
 };
 
 #endif //GF_GRAPHICS_FINAL_SPACESHIP_H
